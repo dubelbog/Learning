@@ -1,0 +1,20 @@
+genre cluster: 0
+abhaile, agus, ar, bh, bheidh, dlamn, fhearr, gaelach, ghr, ina, liom, maidin, nl, shule, tir, 
+genre cluster: 1
+come, don, got, just, know, let, like, ll, love, oh, say, time, ve, want, way, 
+genre cluster: 2
+bewitched, cozy, don, ev, heart, just, know, like, ll, love, marvelous, romance, ry, sigh, thrill, 
+genre cluster: 3
+bitches, fuck, fuckin, gangsta, gon, hoes, holla, homie, mma, nigga, niggas, niggaz, pussy, shorty, tryna, 
+genre cluster: 4
+baby, come, don, gonna, got, just, know, let, like, ll, love, oh, time, ve, way, 
+genre cluster: 5
+baal, blackstar, buh, dann, duh, footstompin, goldmine, helden, janine, ramona, suffragette, tvc, whop, wir, zane, 
+genre cluster: 6
+brennan, bungle, cho, clancys, document, exe, filename, finnegan, fol, galvin, hurroo, loora, roddy, rye, toor, 
+genre cluster: 7
+christi, contre, dieu, donnes, et, hosanna, je, les, mea, moi, nomine, ridi, sade, sont, suis, 
+genre cluster: 8
+blood, death, don, fuck, fuckin, fucking, hatred, just, kill, life, like, ll, time, ve, world, 
+genre cluster: 9
+come, don, got, just, know, like, ll, love, man, oh, say, time, ve, want, yeah, 
