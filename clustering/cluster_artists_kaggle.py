@@ -8,8 +8,9 @@ __author__ = 'don.tuggener@zhaw.ch'
 
 import json
 import re
-import seaborn as sns
+
 import numpy
+import seaborn as sns
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, linkage
 from sklearn.cluster import KMeans
@@ -92,27 +93,26 @@ def elbow_method(x):
 
 
 def plot_pca(lyrics_tfidf_matrix, artist_lyrics):
-    x_artists = lyrics_tfidf_matrix
     y_artists = list(artist_lyrics.keys())
-    x_std = StandardScaler().fit_transform(x_artists)
+    # StandardScaler is helpful to identify outliers
+    x_standard = StandardScaler().fit_transform(lyrics_tfidf_matrix)
 
     pca = PCA(n_components=2)
-    coordinates = pca.fit_transform(x_std)
+    coordinates = pca.fit_transform(lyrics_tfidf_matrix)
 
     with plt.style.context('bmh'):
         plt.figure(figsize=(12, 8), facecolor='#b9c9ba')
         for label, coord in zip(y_artists, coordinates):
             plt.scatter(coord[0], coord[1], alpha=.8)
-        #    plt.annotate(label, (coord[0], coord[1]))
+            plt.annotate(label, (coord[0], coord[1]))
         plt.xlabel('PC0')
         plt.ylabel('PC1')
         plt.tight_layout()
-        plt.savefig('pca.png')
         plt.show()
 
 
 def k_means(X, true_n):
-    model = KMeans(n_clusters=true_n, init='k-means++', max_iter=150).fit(X)
+    model = KMeans(n_clusters=true_n, init='k-means++', max_iter=5000).fit(X)
     y_kmeans = model.predict(X)
     plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=20, cmap='viridis')
     centers = model.cluster_centers_
@@ -123,6 +123,7 @@ def k_means(X, true_n):
 
 
 def remove_outliers(artist_lyrics, artist2genre):
+    # second group of outliers
     del artist_lyrics['eminem']
     del artist2genre['eminem']
     del artist_lyrics['celine-dion']
@@ -162,7 +163,7 @@ if __name__ == '__main__':
     vectorizer = TfidfVectorizer(stop_words='english', sublinear_tf=True)
     # works well if the second group of outliers is commented out / but the model is overfitted
     # every small changes has a big influence on the dendrogram classification
-    # vectorizer = TfidfVectorizer(max_df=0.1132, stop_words='english', sublinear_tf=True)
+    # vectorizer = TfidfVectorizer(max_df=0.1, stop_words='english', sublinear_tf=True)
     lyrics_tfidf_matrix = vectorizer.fit_transform(lyrics).toarray()
     ix2word = dict(enumerate(vectorizer.get_feature_names()))
 
@@ -177,11 +178,10 @@ if __name__ == '__main__':
 
     plot_pca(lyrics_tfidf_matrix, artist_lyrics)
 
-    X = lyrics_tfidf_matrix
- #   elbow_method(X)
+    #   elbow_method(X)
 
     true_n = len(genres_dict)
-    centers = k_means(X, true_n)
+    centers = k_means(lyrics_tfidf_matrix, true_n)
     words_per_genres(true_n, centers)
 
     print('Plotting')

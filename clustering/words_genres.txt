@@ -1,20 +1,20 @@
 genre cluster: 0
-abhaile, agus, ar, bh, bheidh, dlamn, fhearr, gaelach, ghr, ina, liom, maidin, nl, shule, tir, 
+baby, como, don, el, es, know, la, love, mi, na, oh, que, te, tu, yeah, 
 genre cluster: 1
-come, don, got, just, know, let, like, ll, love, oh, say, time, ve, want, way, 
+come, don, got, just, know, like, ll, love, oh, say, time, ve, want, way, yeah, 
 genre cluster: 2
-bewitched, cozy, don, ev, heart, just, know, like, ll, love, marvelous, romance, ry, sigh, thrill, 
+come, don, gonna, got, home, just, know, like, ll, lonesome, love, mem, time, ve, way, 
 genre cluster: 3
-bitches, fuck, fuckin, gangsta, gon, hoes, holla, homie, mma, nigga, niggas, niggaz, pussy, shorty, tryna, 
+come, day, don, got, just, know, let, like, ll, love, man, oh, say, time, ve, 
 genre cluster: 4
-baby, come, don, gonna, got, just, know, let, like, ll, love, oh, time, ve, way, 
+bitches, fuck, fuckin, gangsta, gon, hoes, holla, homie, mma, nigga, niggas, niggaz, pussy, shorty, tryna, 
 genre cluster: 5
-baal, blackstar, buh, dann, duh, footstompin, goldmine, helden, janine, ramona, suffragette, tvc, whop, wir, zane, 
+anodized, demise, elimination, extinction, gore, impact, infection, janssens, kasso, mutilation, relentless, saturates, severed, undercurrents, walkaway, 
 genre cluster: 6
-brennan, bungle, cho, clancys, document, exe, filename, finnegan, fol, galvin, hurroo, loora, roddy, rye, toor, 
+claus, cozy, don, ev, heart, jingle, just, know, like, ll, love, marvelous, oh, sleigh, ve, 
 genre cluster: 7
-christi, contre, dieu, donnes, et, hosanna, je, les, mea, moi, nomine, ridi, sade, sont, suis, 
+anthrax, death, don, fuck, fuckin, fucking, just, kill, know, like, ll, shit, time, ve, world, 
 genre cluster: 8
-blood, death, don, fuck, fuckin, fucking, hatred, just, kill, life, like, ll, time, ve, world, 
+amigos, avr, baci, bij, bim, calici, diech, een, het, kom, libiamo, lindo, maastricht, siempre, stad, 
 genre cluster: 9
-come, don, got, just, know, like, ll, love, man, oh, say, time, ve, want, yeah, 
+come, don, got, just, know, let, like, ll, love, oh, say, time, ve, want, way, 
