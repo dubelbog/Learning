@@ -106,6 +106,49 @@ def analyze_review(review, tokenizer, model, file_name):
         file.close()
 
 
+def analyze_review_6_classes(review, tokenizer, model, file_name):
+    for txt in review:
+        file = open(file_name, "a")
+        Y = tokenizer.transform([txt])
+        prediction = model.predict(Y)
+        print(txt)
+        print(prediction)
+        value = 0
+        max = 0
+        for i in range(7):
+            if value < prediction[0][i]:
+                value = prediction[0][i]
+                max = i
+
+        if max == 0:
+            result = "The comment is neutral"
+        elif max == 1:
+            result = "The comment is toxic"
+        elif max == 2:
+            result = "The comment is severe_toxic"
+        elif max == 3:
+            result = "The comment is obscene"
+        elif max == 4:
+            result = "The comment is threat"
+        elif max == 5:
+            result = "The comment is insult"
+        else:
+            result = "The comment is identity_hate"
+
+        print(result)
+        file.write(txt + " \n" + "neutral " + str(prediction[0][0]) + " \n" +
+                   "toxic " + str(prediction[0][1]) + " \n" +
+                   "severe_toxic " + str(prediction[0][2]) + " \n" +
+                   "obscene " + str(prediction[0][3]) + " \n" +
+                   "threat " + str(prediction[0][4]) + " \n" +
+                   "insult " + str(prediction[0][5]) + " \n" +
+                   "identity_hate " + str(prediction[0][6]) + " \n" +
+                   "result: " + result)
+        file.write("\n")
+        file.write("\n")
+        file.close()
+
+
 def analyze_review_scikit(review, tokenizer, model, file_name):
     for txt in review:
         file = open(file_name, "a")
