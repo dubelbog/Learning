@@ -2,6 +2,7 @@
 Hate speech classification baseline using sklearn
 Dataset: https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data
 """
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 __author__ = "don.tuggener@zhaw.ch"
 
@@ -9,6 +10,7 @@ import keras
 import sys
 import pickle
 import utils_classifier
+import numpy as np
 
 from keras.models import Sequential
 from keras import layers
@@ -16,6 +18,8 @@ import matplotlib.pyplot as plt
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score
+
 
 def plot_history(history):
     acc = history.history['accuracy']
@@ -89,8 +93,61 @@ if __name__ == '__main__':
 
     loss, accuracy = clf.evaluate(X_train, Y_train, verbose=False)
     print("Training Accuracy: {:.4f}".format(accuracy))
+    print("Training loss:  {:.4f}".format(loss))
+
     loss, accuracy = clf.evaluate(X_test, Y_test, verbose=False)
     print("Testing Accuracy:  {:.4f}".format(accuracy))
+    print("Testing loss:  {:.4f}".format(loss))
+
+    # predict probabilities for test set
+    yhat_probs = clf.predict(X_test, verbose=0)
+    # predict crisp classes for test set
+    yhat_classes = clf.predict_classes(X_test, verbose=0)
+    # reduce to 1d array
+    yhat_probs = yhat_probs[:, 0]
+
+    w, h = 2, len(yhat_classes)
+    y_test_2d = [[0 for x in range(w)] for y in range(h)]
+    for i in range(len(yhat_classes)):
+        if yhat_classes[i] == 1:
+            y_test_2d[i] = [0, 1]
+        else:
+            y_test_2d[i] = [1, 0]
+
+    # w, h = 6, len(yhat_classes)
+    # y_test_2d = [[0 for x in range(w)] for y in range(h)]
+    # for i in range(len(yhat_classes)):
+    #     if yhat_classes[i] == 0:
+    #         y_test_2d[i] = [1, 0, 0, 0, 0, 0]
+    #     elif yhat_classes[i] == 1:
+    #         y_test_2d[i] = [0, 1, 0, 0, 0, 0]
+    #     elif yhat_classes[i] == 2:
+    #         y_test_2d[i] = [0, 0, 1, 0, 0, 0]
+    #     elif yhat_classes[i] == 3:
+    #         y_test_2d[i] = [0, 0, 0, 1, 0, 0]
+    #     elif yhat_classes[i] == 4:
+    #         y_test_2d[i] = [0, 0, 0, 0, 1, 0]
+    #     else:
+    #         y_test_2d[i] = [0, 0, 0, 0, 0, 1]
+
+    # # accuracy: (tp + tn) / (p + n)
+    # accuracy = accuracy_score(Y_test, yhat_classes)
+    # print('Accuracy: %f' % accuracy)
+    # # precision tp / (tp + fp)
+    # precision = precision_score(Y_test, yhat_classes)
+    # print('Precision: %f' % precision)
+    # # recall: tp / (tp + fn)
+    # recall = recall_score(Y_test, yhat_classes)
+    # print('Recall: %f' % recall)
+    # f1: 2 tp / (2 tp + fp + fn)
+    f1 = f1_score(Y_test, np.array(y_test_2d), average='weighted')
+    print('F1 score weighted: %f' % f1)
+
+    f1 = f1_score(Y_test, np.array(y_test_2d), average='micro')
+    print('F1 score micro: %f' % f1)
+
+    f1 = f1_score(Y_test, np.array(y_test_2d), average='macro')
+    print('F1 score macro: %f' % f1)
 
     plt.style.use('ggplot')
     plot_history(history)
