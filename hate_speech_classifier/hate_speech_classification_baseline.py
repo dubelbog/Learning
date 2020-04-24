@@ -29,9 +29,11 @@ if __name__ == '__main__':
         print('Downsampled data shape:', X_tfidf_matrix.shape)
 
     print('Classification and evaluation', file=sys.stderr)
-    clf = LinearSVC(class_weight='balanced')    # Weight samples inverse to class imbalance
+    clf = LinearSVC(C=1, tol=0.001)    # Weight samples inverse to class imbalance
     # Randomly split data into 80% training and 20% testing, preserve class distribution with stratify
     X_train, X_test, Y_train, Y_test = train_test_split(X_tfidf_matrix, Y, test_size=0.2, random_state=42, stratify=Y)
+
+    utils_classifier.plot_learning_curve(clf, X_tfidf_matrix, Y,  'Learning Curve Logistic Regression', 'learning_curve_svm.png')
 
     clf.fit(X_train, Y_train)
     y_pred = clf.predict(X_test)
@@ -40,9 +42,9 @@ if __name__ == '__main__':
 
     dump(clf, 'sentiment_baseline.joblib')
 
-    # Apply cross-validation, create prediction for all data point
-    numcv = 3   # Number of folds
-    print('Using', numcv, 'folds', file=sys.stderr)
-    y_pred = cross_val_predict(clf, X_tfidf_matrix, Y, cv=numcv)
-    print(classification_report(Y, y_pred), file=sys.stderr)
+    # # Apply cross-validation, create prediction for all data point
+    # numcv = 3   # Number of folds
+    # print('Using', numcv, 'folds', file=sys.stderr)
+    # y_pred = cross_val_predict(clf, X_tfidf_matrix, Y, cv=numcv)
+    # print(classification_report(Y, y_pred), file=sys.stderr)
 

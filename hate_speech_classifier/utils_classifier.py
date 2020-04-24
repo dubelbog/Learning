@@ -9,6 +9,8 @@ import zipfile
 from collections import Counter
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+import matplotlib.pyplot as plt
+from sklearn.model_selection import learning_curve
 
 random.seed(42)  # Ensure reproducible results
 STEMMER = SnowballStemmer("english")
@@ -58,6 +60,17 @@ def read_data_classifier(remove_stopwords=True, remove_numbers=True, do_stem=Tru
     return X, Y
 
 
+def plot_learning_curve(clf, X_tfidf_matrix, Y, title, file_name):
+    train_sizes, train_scores, valid_scores = learning_curve(clf, X_tfidf_matrix, Y, train_sizes=[1000, 5000, 10000, 15000, 25000], cv=5)
+    plt.figure(figsize=(12, 5))
+    plt.plot(train_sizes, train_scores, 'b', label='Training scores')
+    plt.plot(train_sizes, valid_scores, 'r', label='Validation scores')
+    plt.title(title)
+    plt.legend()
+    plt.savefig(file_name)
+    plt.show()
+
+
 def get_reviews():
     return ["I don’t get why negroes always traveling to white countries. Take your ass to Africa!",
                      "I don’t get why white girls always traveling to white countries. Go to Africa!",
@@ -81,8 +94,7 @@ def get_reviews():
                      "The world is stupid",
                      "The world is wonderful",
                      "what do you want to know?",
-                     "it is an absolute shit"
-                     ]
+                     "it is an absolute shit"]
 
 
 def analyze_review(review, tokenizer, model, file_name):

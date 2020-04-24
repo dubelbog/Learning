@@ -40,6 +40,8 @@ if __name__ == '__main__':
     # Randomly split data into 80% training and 20% testing, preserve class distribution with stratify
     X_train, X_test, Y_train, Y_test = train_test_split(X_tfidf_matrix, Y, test_size=0.2, random_state=42, stratify=Y)
 
+    utils_classifier.plot_learning_curve(clf, X_tfidf_matrix, Y, 'Learning Curve Logistic Regression', 'learning_curve_regression.png')
+
     clf.fit(X_train, Y_train)
     y_pred = clf.predict(X_test)
     print(classification_report(Y_test, y_pred), file=sys.stderr)
