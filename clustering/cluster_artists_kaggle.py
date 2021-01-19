@@ -154,6 +154,7 @@ if __name__ == '__main__':
     remove_outliers(artist_lyrics, artist2genre)
     # Custom tokenization to remove numbers etc.
     lyrics = [' '.join(re.findall('[A-Za-z]+', l)) for l in artist_lyrics.values()]
+    print("test")
 
     print('Vectorizing with TF IDF')
     # Vectorize the song lyrics
